@@ -1,0 +1,538 @@
+@import "tailwindcss";
+
+:root {
+  /* Global CSS Variables for Brain Studio Theming */
+  --bg-color: #F8F7F2;
+  --bg-main: #F8F7F2;
+  --bg-card: #FFFFFF;
+  --bg-card-secondary: #F1F0E9;
+  --text-color: #1A202C;
+  --text-primary: #1A202C;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --btn-primary: #5D5CDE;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover: #4B4AC8;
+  --color-success: #38A169;
+  --color-accent: #E2FF31;
+  --border-color: #E2E8F0;
+  --border-subtle: #EDF2F7;
+  --color-bg-main: #F8F7F2;
+  --color-text-primary: #1A202C;
+
+  /* Aliases for prototype compatibility */
+  --bg-warm-sand: #F8F7F2;
+  --card-white: #FFFFFF;
+  --text-charcoal: #1A202C;
+  --btn-indigo: #5D5CDE;
+  --success-sage: #38A169;
+}
+
+@theme {
+  --color-theme-bg: var(--bg-main);
+  --color-theme-card: var(--bg-card);
+  --color-theme-card-secondary: var(--bg-card-secondary);
+  --color-theme-text: var(--text-primary);
+  --color-theme-text-secondary: var(--text-secondary);
+  --color-theme-text-muted: var(--text-muted);
+  --color-theme-btn: var(--btn-primary);
+  --color-theme-btn-text: var(--btn-primary-text);
+  --color-theme-btn-hover: var(--btn-primary-hover);
+  --color-theme-success: var(--color-success);
+  --color-theme-accent: var(--color-accent);
+  --color-theme-border: var(--border-color);
+}
+
+@layer base {
+  body {
+    @apply antialiased selection:bg-[#5D5CDE] selection:text-white;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* =========================================================
+   PUPPET STYLE MARIONETTE ANIMATIONS (TRANSFORM-ORIGIN + KEYFRAMES)
+   ========================================================= */
+
+/* 1. Torso Breathing & Base Grounding */
+@keyframes puppetBreathe {
+  0%, 100% {
+    transform: scale(1, 1) translateY(0);
+  }
+  50% {
+    transform: scale(1.025, 0.975) translateY(1.5px);
+  }
+}
+
+/* 2. Head Bobbing & Tilting */
+@keyframes puppetHeadBob {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  33% {
+    transform: rotate(2deg) translateY(-2px);
+  }
+  66% {
+    transform: rotate(-1.5deg) translateY(-1px);
+  }
+}
+
+/* 3. Left Ear Flutter & Wiggle */
+@keyframes puppetLeftEar {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+/* 4. Right Ear Flutter & Wiggle (Offset timing) */
+@keyframes puppetRightEar {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(6deg);
+  }
+  70% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* 5. Left Paw Sway */
+@keyframes puppetLeftPaw {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-8deg) translateY(-3px);
+  }
+}
+
+/* 6. Right Paw Sway */
+@keyframes puppetRightPaw {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(7deg) translateY(-2px);
+  }
+}
+
+/* 7. Tail Pendulum Wag */
+@keyframes puppetTailWag {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-12deg);
+  }
+  75% {
+    transform: rotate(12deg);
+  }
+}
+
+/* 8. Realistic Eye Blink */
+@keyframes puppetEyeBlink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  94%, 98% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* 9. Celebration & Level Up Jump */
+@keyframes puppetCelebrate {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-20px) scale(1.1) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-25px) scale(1.15) rotate(4deg);
+  }
+  75% {
+    transform: translateY(-10px) scale(1.05) rotate(-2deg);
+  }
+}
+
+/* 10. Organic Mesh Simulation for Custom Uploaded Image */
+@keyframes puppetMeshOrganic {
+  0%, 100% {
+    transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
+  }
+  25% {
+    transform: perspective(400px) rotateX(2deg) rotateY(-3deg) scale(1.02, 0.98) translateY(-3px);
+  }
+  50% {
+    transform: perspective(400px) rotateX(0deg) rotateY(2deg) scale(0.99, 1.01) translateY(2px);
+  }
+  75% {
+    transform: perspective(400px) rotateX(-2deg) rotateY(-1deg) scale(1.01, 0.99) translateY(-2px);
+  }
+}
+
+/* Puppet utility classes with specific transform origins */
+.puppet-body {
+  transform-origin: center bottom;
+  animation: puppetBreathe 3.6s infinite ease-in-out;
+}
+
+.puppet-head {
+  transform-origin: center 85%;
+  animation: puppetHeadBob 4.2s infinite ease-in-out;
+}
+
+.puppet-ear-left {
+  transform-origin: bottom right;
+  animation: puppetLeftEar 2.8s infinite ease-in-out;
+}
+
+.puppet-ear-right {
+  transform-origin: bottom left;
+  animation: puppetRightEar 3.1s infinite ease-in-out;
+}
+
+.puppet-paw-left {
+  transform-origin: top right;
+  animation: puppetLeftPaw 2.4s infinite ease-in-out;
+}
+
+.puppet-paw-right {
+  transform-origin: top left;
+  animation: puppetRightPaw 2.7s infinite ease-in-out;
+}
+
+.puppet-tail {
+  transform-origin: top center;
+  animation: puppetTailWag 1.8s infinite ease-in-out;
+}
+
+.puppet-eyes {
+  transform-origin: center center;
+  animation: puppetEyeBlink 4s infinite ease-in-out;
+}
+
+.puppet-custom-mesh {
+  transform-origin: center bottom;
+  animation: puppetMeshOrganic 4s infinite ease-in-out;
+}
+
+.puppet-celebrating {
+  animation: puppetCelebrate 0.8s ease-in-out infinite !important;
+}
+
+/* Pulse & glow utilities */
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(93, 92, 222, 0.35));
+  }
+  50% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 25px rgba(93, 92, 222, 0.65));
+  }
+}
+
+.lumina-glow {
+  animation: pulseGlow 3.5s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.2);
+  border-radius: 9999px;
+}
+
+@keyframes puppetHead {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(-2deg); }
+}
+
+@keyframes puppetBody {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(1deg) scale(1.02); }
+}
+
+.animate-puppet-head {
+  animation: puppetHead 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-puppet-body {
+  animation: puppetBody 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Tipografia Estilo Cartunesco & Game HUD */
+.texto-destaque-game {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 
+    2px 2px 0px #000,
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+@keyframes balancarHud {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); color: #ffe600; }
+  100% { transform: scale(1); }
+}
+
+.balancar-hud {
+  animation: balancarHud 0.15s ease-in-out;
+}
+
+/* Card com Moldura Dourada */
+.card-moldura-dourada {
+  background: linear-gradient(180deg, #2a4365 0%, #1a202c 100%);
+  border: 3px solid #ffe600;
+  border-radius: 16px;
+  box-shadow: 0 6px 0 #b87b00, 0 10px 15px rgba(0,0,0,0.4);
+}
+
+/* Botões 3D Gamificados */
+.btn-acao-principal {
+  background: linear-gradient(180deg, #51f08e 0%, #2ecc71 100%);
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0px #000;
+  box-shadow: 0 5px 0 #1e824c;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.btn-acao-principal:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+.btn-acao-secundaria {
+  background: linear-gradient(180deg, #60a5fa 0%, #1d4ed8 100%);
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0px #000;
+  box-shadow: 0 5px 0 #1e3a8a;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.btn-acao-secundaria:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+.btn-acao-recompensa {
+  background: linear-gradient(180deg, #c084fc 0%, #7e22ce 100%);
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0px #000;
+  box-shadow: 0 5px 0 #581c87;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.btn-acao-recompensa:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+.btn-pwa-instalar {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0px #000;
+  box-shadow: 0 5px 0 #b45309;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.btn-pwa-instalar:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+/* App Acadêmico IFES - Complete Edition Styles */
+.card-moldura {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 3px solid #38bdf8;
+  border-radius: 16px;
+  box-shadow: 0 6px 0 #0284c7, 0 10px 15px rgba(0,0,0,0.4);
+  padding: 14px;
+}
+
+.card-dourado {
+  border-color: #ffe600;
+  box-shadow: 0 6px 0 #b87b00, 0 10px 15px rgba(0,0,0,0.4);
+}
+
+.card-vermelho {
+  border-color: #ef4444;
+  box-shadow: 0 6px 0 #991b1b, 0 10px 15px rgba(0,0,0,0.4);
+}
+
+.descricao-card {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0 0 10px 0;
+}
+
+.trilho-barra {
+  width: 100%;
+  height: 12px;
+  background-color: #0f172a;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  margin-top: 4px;
+}
+
+.preenchimento-barra {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8, #2ecc71);
+  transition: width 0.3s linear;
+}
+
+.preenchimento-hp {
+  background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.btn-3d {
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0px #000;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.btn-3d:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+
+.btn-3d:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-verde {
+  background: linear-gradient(180deg, #51f08e 0%, #2ecc71 100%);
+  box-shadow: 0 4px 0 #1e824c;
+}
+
+.btn-azul {
+  background: linear-gradient(180deg, #60a5fa 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 0 #1e3a8a;
+}
+
+.btn-roxo {
+  background: linear-gradient(180deg, #c084fc 0%, #7e22ce 100%);
+  box-shadow: 0 4px 0 #581c87;
+}
+
+.btn-fogo {
+  background: linear-gradient(180deg, #fb923c 0%, #f97316 100%);
+  box-shadow: 0 4px 0 #c2410c;
+}
+
+.btn-vermelho {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 100%);
+  box-shadow: 0 4px 0 #991b1b;
+}
+
+.display-cronometro {
+  font-size: 30px;
+  text-align: center;
+  background: #0284c7;
+  padding: 8px;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  margin: 8px 0;
+  text-shadow: 2px 2px 0 #000;
+  color: #fff;
+  font-weight: 700;
+}
+
+.item-lista {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.gacha-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.card-colecao {
+  background: #0f172a;
+  border: 2px solid #334155;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+
+.card-colecao.raro {
+  border-color: #3b82f6;
+}
+
+.card-colecao.epico {
+  border-color: #a855f7;
+}
+
+.card-colecao.lendario {
+  border-color: #ffe600;
+  box-shadow: 0 0 10px #ffe600;
+}
+
+

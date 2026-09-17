@@ -1,0 +1,6 @@
+{
+  "name": "Brain Studio",
+  "description": "Plataforma educacional gamificada e inteligente com IA Socrática Lumina, trilhas sequenciais, Mascote Lab, duelos de equipes e gestão de estudos.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
